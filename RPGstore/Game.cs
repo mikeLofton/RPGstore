@@ -53,7 +53,43 @@ namespace RPGstore
 
         private int GetInput(string description, params string[] options)
         {
+            string choice = "";
+            int inputRecieved = -1;
 
+            while (inputRecieved == -1)
+            {
+                Console.WriteLine(description);
+                for (int i = 0; i < options.Length; i++)
+                {
+                    Console.WriteLine((i + 1) + ". " + options[i]);
+                }
+                Console.Write("> ");
+
+                choice = Console.ReadLine();
+
+                if (int.TryParse(choice, out inputRecieved))
+                {
+                    inputRecieved--;
+                    if (inputRecieved < 0 || inputRecieved >= options.Length)
+                    {
+                        inputRecieved = -1;
+                        //Display error message
+                        Console.WriteLine("Invalid Input");
+                        Console.ReadKey(true);
+                    }
+                }
+                else
+                {
+                    inputRecieved = -1;
+                    Console.WriteLine("Invalid Input");
+                    Console.ReadKey(true);
+                }
+
+                Console.Clear();
+            }
+
+            return inputRecieved;
         }
+        
     }
 }
