@@ -19,7 +19,7 @@ namespace RPGstore
 
         public bool Sell(Player player, int itemIndex, int playerIndex)
         {
-
+            return true;
         }
 
         public string[] GetItemNames()

@@ -9,20 +9,24 @@ namespace RPGstore
     {
         private int _gold;
         private Item[] _inventory;
-
-        public Player(int inventoryIndex)
+        
+        public int Gold
         {
-            _gold = 500;
-            _inventory = new Item[inventoryIndex];
+            get { return _gold; }
         }
 
-        public void Buy(Item item)
+        public Player()
+        {
+            _gold = 500;
+            _inventory = new Item[3];
+        }
+
+        public void Buy(Item item, int inventoryIndex)
         {
             if (_gold >= item.Cost)
             {
-                
-
-
+                _gold -= item.Cost;
+                _inventory[inventoryIndex] = item;
             }
         }
 
@@ -45,7 +49,7 @@ namespace RPGstore
 
         public bool Load(StreamReader reader)
         {
-
+            return false;
         }
     }
 }

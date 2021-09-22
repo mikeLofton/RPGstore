@@ -43,7 +43,8 @@ namespace RPGstore
 
         private void Update()
         {
-
+            DisplayCurrentScene();
+            Console.Clear();
         }
 
         private void End()
@@ -110,7 +111,7 @@ namespace RPGstore
 
         private bool Load()
         {
-            
+            return true;
         }
 
         private void DisplayCurrentScene()
@@ -133,7 +134,7 @@ namespace RPGstore
 
         private void DisplayOpeningMenu()
         {
-            int choice = GetInput("Welcome to the My Shop. What're ya here for?", "1. Start Shopping", "2. Load Inventory");
+            int choice = GetInput("Welcome to My Shop. What're ya here for?", "Start Shopping", "Load Inventory");
 
             if (choice == 0)
             {
@@ -159,11 +160,23 @@ namespace RPGstore
 
         private string[] GetShopMenuOptions()
         {
+            string[] itemsForSale = new string[_shopInventory.Length];
 
+            for (int i = 0; i < _shopInventory.Length; i++)
+            {
+                itemsForSale[i] = _shopInventory[i].Name;
+            }
+
+            return itemsForSale;
         }
 
         private void DisplayShopMenu()
         {
+            Console.WriteLine("Your gold: " + _player.Gold);
+            Console.WriteLine("Your Inventory: " + "\n");
+
+            int choice = GetInput("What're ya buying", _sword.Name, _shield.Name, _healthPotion.Name, "Save", "Quit");    
+            
 
         }
         
