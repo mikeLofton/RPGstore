@@ -14,7 +14,11 @@ namespace RPGstore
     class Game
     {
         private Player _player;
-        private Shop _shop;     
+        private Shop _shop;
+        private Item _sword;
+        private Item _shield;
+        private Item _healthPotion;
+        private Item[] _shopInventory;
         private bool _gameOver = false;
         private int _currentScene = 0;
 
@@ -48,7 +52,13 @@ namespace RPGstore
 
         private void InitializeItems()
         {
+            //Shop Items 
+            _sword = new Item { Name = "Shiny Sword", Cost = 500 };
+            _shield = new Item { Name = "Big Shield", Cost = 100 };
+            _healthPotion = new Item { Name = "Health Potion", Cost = 15 };
 
+            //Initialize Array
+            _shopInventory = new Item[] { _sword, _shield, _healthPotion };
         }
 
         private int GetInput(string description, params string[] options)
