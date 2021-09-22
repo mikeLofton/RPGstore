@@ -18,7 +18,7 @@ namespace RPGstore
         public Player()
         {
             _gold = 500;
-            _inventory = new Item[3];
+            _inventory = new Item[];
         }
 
         public void Buy(Item item, int inventoryIndex)
