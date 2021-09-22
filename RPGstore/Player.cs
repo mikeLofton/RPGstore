@@ -7,6 +7,32 @@ namespace RPGstore
 {
     class Player
     {
+        private int _gold;
+        private int _inventory;
 
+        public Player()
+        {
+
+        }
+
+        public void Buy()
+        {
+
+        }
+
+        public string[] GetItemNames()
+        {
+
+        }
+
+        public void Save()
+        {
+
+        }
+
+        public bool Load()
+        {
+
+        }
     }
 }

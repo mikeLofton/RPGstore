@@ -90,6 +90,36 @@ namespace RPGstore
 
             return inputRecieved;
         }
+
+        private void Save()
+        {
+
+        }
+
+        private bool Load()
+        {
+
+        }
+
+        private void DisplayCurrentScene()
+        {
+
+        }
+
+        private void DisplayOpeningMenu()
+        {
+
+        }
+
+        private string[] GetShopMenuOptions()
+        {
+
+        }
+
+        private void DisplayShopMenu()
+        {
+
+        }
         
     }
 }
