@@ -36,7 +36,9 @@ namespace RPGstore
 
         private void Start()
         {
-            
+            _player = new Player();
+            InitializeItems();
+            _shop = new Shop(_shopInventory);
         }
 
         private void Update()
@@ -108,17 +110,51 @@ namespace RPGstore
 
         private bool Load()
         {
-
+            
         }
 
         private void DisplayCurrentScene()
         {
+            switch (_currentScene)
+            {
+                case 0:
+                    DisplayOpeningMenu();
+                    break;
 
+                case 1:
+                    DisplayShopMenu();
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid scene index");
+                    break;
+            }
         }
 
         private void DisplayOpeningMenu()
         {
+            int choice = GetInput("Welcome to the My Shop. What're ya here for?", "1. Start Shopping", "2. Load Inventory");
 
+            if (choice == 0)
+            {
+                _currentScene = 1;
+            }
+            else if (choice == 1) 
+            { 
+                if (Load())
+                {
+                    Console.WriteLine("Load Successful");
+                    Console.ReadKey(true);
+                    Console.Clear();
+                    _currentScene = 1;
+                }
+                else
+                {
+                    Console.WriteLine("Load Failed");
+                    Console.ReadKey(true);
+                    Console.Clear();
+                }
+            }
         }
 
         private string[] GetShopMenuOptions()

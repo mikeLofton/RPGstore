@@ -12,7 +12,9 @@ namespace RPGstore
 
         public Shop (Item[] items)
         {
-
+            _gold = 100;
+            _inventory = new Item[3];
+            _inventory = items;
         }
 
         public bool Sell(Player player, int itemIndex, int playerIndex)
@@ -22,7 +24,14 @@ namespace RPGstore
 
         public string[] GetItemNames()
         {
+            string[] itemNames = new string[_inventory.Length];
+            
+            for (int i = 0; i < _inventory.Length; i++)
+            {
+                itemNames[i] = _inventory[i].Name;
+            }
 
+            return itemNames;
         }
     }
 }

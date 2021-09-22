@@ -8,29 +8,42 @@ namespace RPGstore
     class Player
     {
         private int _gold;
-        private int _inventory;
+        private Item[] _inventory;
 
-        public Player()
+        public Player(int inventoryIndex)
         {
-
+            _gold = 500;
+            _inventory = new Item[inventoryIndex];
         }
 
-        public void Buy()
+        public void Buy(Item item)
         {
+            if (_gold >= item.Cost)
+            {
+                
 
+
+            }
         }
 
         public string[] GetItemNames()
         {
+            string[] itemNames = new string[_inventory.Length];
 
+            for (int i = 0; i < _inventory.Length; i++)
+            {
+                itemNames[i] = _inventory[i].Name;
+            }
+
+            return itemNames;
         }
 
-        public void Save()
+        public void Save(StreamWriter writer)
         {
 
         }
 
-        public bool Load()
+        public bool Load(StreamReader reader)
         {
 
         }
