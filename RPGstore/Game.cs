@@ -106,11 +106,28 @@ namespace RPGstore
 
         private void Save()
         {
+            StreamWriter writer = new StreamWriter("ShopSave.txt");
 
+            _player.Save(writer);
+
+            writer.Close();
         }
 
         private bool Load()
         {
+            StreamReader reader = new StreamReader("ShopSave.txt");
+
+            if (!_player.Load(reader))
+            {
+                reader.Close();
+                return false;
+            }
+            if (!_shop.Load(reader))
+            {
+                reader.Close();
+                return false;
+            }
+
             return true;
         }
 

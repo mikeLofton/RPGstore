@@ -37,5 +37,38 @@ namespace RPGstore
 
             return itemNames;
         }
+
+        public void Save(StreamWriter writer)
+        {
+            writer.WriteLine(_gold);
+
+            writer.WriteLine(_inventory.Length);
+
+            for (int i = 0; i < _inventory.Length; i++)
+            {
+                writer.WriteLine(_inventory[i].Name);
+                writer.WriteLine(_inventory[i].Cost);
+            }
+        }
+
+        public bool Load(StreamReader reader)
+        {
+            if (int.TryParse(reader.ReadLine(), out _gold))
+            {
+                return false;
+            }
+
+            string inventoryLength = Console.ReadLine();
+
+            _inventory = new Item[int.Parse(inventoryLength)];
+
+            for (int i = 0; i < _inventory.Length; i++)
+            {
+                _inventory[i].Name = reader.ReadLine();
+                _inventory[i].Cost = int.Parse(reader.ReadLine());
+            }
+
+            return true;
+        }
     }
 }
