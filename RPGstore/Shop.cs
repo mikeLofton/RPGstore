@@ -17,9 +17,17 @@ namespace RPGstore
             _inventory = items;
         }
 
-        public bool Sell(Player player, int itemIndex, int playerIndex)
+        public bool Sell(Player player, int itemIndex)
         {
-            
+            Item itemForSale = _inventory[itemIndex];
+
+            if (player.Buy(itemForSale))
+            {
+                _gold += itemForSale.Cost;
+                return true;
+            }
+
+            return false;
         }
 
         public string[] GetItemNames()

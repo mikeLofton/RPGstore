@@ -18,16 +18,18 @@ namespace RPGstore
         public Player()
         {
             _gold = 500;
-            _inventory = new Item[];
+            _inventory = new Item[3];
         }
 
-        public void Buy(Item item, int inventoryIndex)
+        public bool Buy(Item item)
         {
             if (_gold >= item.Cost)
             {
                 _gold -= item.Cost;
-                _inventory[inventoryIndex] = item;
+                return true;
             }
+
+            return false;
         }
 
         public string[] GetItemNames()

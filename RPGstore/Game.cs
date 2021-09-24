@@ -161,12 +161,13 @@ namespace RPGstore
         private string[] GetShopMenuOptions()
         {
             string[] itemsForSale = new string[_shopInventory.Length];
+            string[] menuOptions = new string[_shopInventory.Length];
 
             for (int i = 0; i < _shopInventory.Length; i++)
             {
                 itemsForSale[i] = _shopInventory[i].Name;
             }
-
+        
             return itemsForSale;
         }
 
@@ -175,10 +176,18 @@ namespace RPGstore
             Console.WriteLine("Your gold: " + _player.Gold);
             Console.WriteLine("Your Inventory: " + "\n");
 
-            int choice = GetInput("What're ya buying", _sword.Name, _shield.Name, _healthPotion.Name, "Save", "Quit");    
-            
+            int choice = GetInput("What're ya buying", _sword.Name, _shield.Name, _healthPotion.Name, "Save", "Quit");
 
+            if (choice == 0)
+            {
+                _shop.Sell(_player, 0);
+            }
+            else if (choice == 1)
+            {
+                _shop.Sell(_player, 1);
+            }
+           
         }
-        
+      
     }
 }
