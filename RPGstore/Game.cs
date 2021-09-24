@@ -160,33 +160,69 @@ namespace RPGstore
 
         private string[] GetShopMenuOptions()
         {
-            string[] itemsForSale = new string[_shopInventory.Length];
-            string[] menuOptions = new string[_shopInventory.Length];
+            string[] itemsForSale = _shop.GetItemNames();
+            string[] menuOptions = new string[itemsForSale.Length + 2];
 
-            for (int i = 0; i < _shopInventory.Length; i++)
+            for (int i = 0; i < itemsForSale.Length; i++)
             {
-                itemsForSale[i] = _shopInventory[i].Name;
+                menuOptions[i] = itemsForSale[i];
             }
+
+            menuOptions[itemsForSale.Length] = "Save Game";
+            menuOptions[itemsForSale.Length + 1] = "Quit Game";
         
-            return itemsForSale;
+            return menuOptions;
         }
 
         private void DisplayShopMenu()
         {
+            string[] playerItemNames = _player.GetItemNames();
+
             Console.WriteLine("Your gold: " + _player.Gold);
             Console.WriteLine("Your Inventory: " + "\n");
 
-            int choice = GetInput("What're ya buying", _sword.Name, _shield.Name, _healthPotion.Name, "Save", "Quit");
+            foreach (string itemName in playerItemNames)
+            {
+                Console.WriteLine(itemName);
+            }
+            Console.WriteLine();
 
-            if (choice == 0)
+            int choice = GetInput("What're ya buying", GetShopMenuOptions());
+
+            if (choice >= 0 && choice < GetShopMenuOptions().Length - 2)
             {
-                _shop.Sell(_player, 0);
+                if (_shop.Sell(_player, choice))
+                {
+                    Console.Clear();
+                    Console.WriteLine($"You purchased the {_shop.GetItemNames()[choice]}!");
+                    Console.ReadKey();
+                    Console.Clear();
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine("You don't have enough gold for that.");
+                    Console.ReadKey(true);
+                    Console.Clear();
+                }
             }
-            else if (choice == 1)
+
+            // Save game
+            if (choice == GetShopMenuOptions().Length - 2)
             {
-                _shop.Sell(_player, 1);
+                Console.Clear();
+                Save();
+                Console.WriteLine("Game saved successfully!");
+                Console.ReadKey(true);
+                Console.Clear();
             }
-           
+
+            // Quit game
+            if (choice == GetShopMenuOptions().Length - 1)
+            {
+                _gameOver = true;
+            }
+
         }
       
     }
